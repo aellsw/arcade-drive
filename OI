@@ -1,0 +1,31 @@
+package org.usfirst.frc.team123.robot.subsystems;
+
+import org.usfirst.frc.team123.robot.RobotMap;
+import org.usfirst.frc.team123.robot.commands.ArcadeDrive_Command;
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.command.Subsystem;
+
+public class DriveTrain_Subsystem extends Subsystem
+{
+	private RobotDrive MainDrive = new RobotDrive(RobotMap.Drive_Left, RobotMap.Drive_Right);
+	
+	@Override
+	protected void initDefaultCommand() 
+	{
+		setDefaultCommand(new ArcadeDrive_Command());
+	}
+	
+	public void TeleopDrive(Joystick Driver)
+	//*tank drive public void TeleopDrive(Joystick Driver, Joystick Driver2)
+	{
+		MainDrive.arcadeDrive(Driver.getX(), Driver.getY());
+		//*can be MainDrive.tankDrive(Driver.getx(), Driver2.getx());
+	}
+
+	public void Stop()
+	{
+		MainDrive.drive(0, 0);
+	}
+}
